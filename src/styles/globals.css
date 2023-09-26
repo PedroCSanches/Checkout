@@ -1,27 +1,50 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+main {
+  text-align: center;
+  width: 100%;
+  margin-top: 5%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.container {
+  border-style: solid;
+  border-radius: 20px;
+  border-width: 2px;
+  width: 50%;
+  margin: auto;
+  padding: 30px;
+  background-color: #448FA3;
+  color: #02182B;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.header {
+  display: flex;
+  margin-bottom: 5%;
+  justify-content: space-between;
+}
+
+.qtd {
+  width: 20%;
+}
+
+.addButton {
+  height: 35px;
+  width: 35px;
+  border-radius: 10%
+}
+
+.list {
+  margin-top: 10%;
+}
+
+.table,tr {
+  border-collapse: collapse;
+    border: 1px solid black;
+    padding: 15px;
+    text-align: left;
+    width: 100%;
+    justify-content: space-between;
 }
