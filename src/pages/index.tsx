@@ -30,6 +30,8 @@ export default function Home() {
   const [idValue, setIdValue] = useState<number>()
   {/* armazenando quantidade */}
   const [quantity, setQuantity] = useState<number>(1)
+  {/* armazenando quantidade da tabela */}
+  const [quantityTable, setQuantityTable] = useState<number>(1)
   {/* armazenando todos valores */}
   const [stored, setStored] = useState<productType | undefined>()
   {/* tabela */}
@@ -44,13 +46,46 @@ export default function Home() {
 function saveQuantity(inputElement: ChangeEvent<HTMLInputElement>){
   setQuantity(+inputElement.target.value)
 }
+{/* salvando quantidade da tabela */}
+function saveQuantityTable(inputElement: ChangeEvent<HTMLInputElement>){
+  setQuantityTable(+inputElement.target.value)
+}
 
 
 function saveProduct() {
   setStored(tabela.find((item) => item.id === idValue))
 }
 
+function addProduct() {
+  if (stored) {
+    {/* criando uma cópia da tabela */}
+    const newTable = [...table]
 
+    {/* adicionando o novo produto a copia da tabela */}
+    newTable.push({
+      id: stored.id,
+      name: stored.name,
+      price: stored.price,
+    })
+    {/* atualizando a tabela com sua copia atualizada */}
+    setTable(newTable);
+  }
+
+  
+}
+
+{/* removendo item da tabela */}
+function remove(index:number) {
+      
+  {/* criando um array temporario com a lista */}
+  let tempArray = [...table] 
+  {/* pegando qual é o item da lista e do lado direito escolhendo a quantidade que sera removida */}
+  tempArray.splice(index,1)
+
+  {/* e por ultimo passando o array temporario sem o item que foi removido para a lista original */}
+  setTable(tempArray)
+  
+}
 
 
   return (
@@ -69,7 +104,7 @@ function saveProduct() {
 
         <div>Preço : R$  {stored ? (quantity * stored.price).toFixed(2) : "0,00"}</div>
 
-        <div ><button className='addButton' >➕</button></div>
+        <div ><button className='addButton' onClick={addProduct}>➕</button></div>
       </div>
 
 
@@ -96,10 +131,10 @@ function saveProduct() {
               <tr key={tableItem.id}>
                 <td>{tableItem.id}</td>
                 <td>{tableItem.name}</td>
-                <td><input type="number"  className='qtd'/></td>
-                <td>tttt</td>
+                <td><input type="number" value={quantityTable} onChange={saveQuantityTable} className='qtd'/></td>
                 <td>{tableItem.price}</td>
-                <td><button>Delete</button></td>
+                <td>{stored ? (quantityTable * stored.price).toFixed(2) : "0,00"}</td>
+                <td><button onClick={() => remove(index)}>Delete</button></td>
             </tr>
           )}
           </tbody>
